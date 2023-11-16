@@ -1,6 +1,7 @@
 django==4.2.7
 django-extensions
 ipython
+Jinja2
 
 #flake8
 flake8

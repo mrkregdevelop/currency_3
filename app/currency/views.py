@@ -1,20 +1,23 @@
 from django.http.response import HttpResponse
+from django.shortcuts import render
 
 from currency.models import Rate
 
 
 def rate_list(request):
-
-    results = []
+    '''
+    MVT(MVC) U
+    M - model
+    V - view
+    T - template
+    U - urls
+    '''
     rates = Rate.objects.all()
+    context = {
+        'rates': rates
+    }
 
-    for rate in rates:
-        results.append(
-            f'ID: {rate.id}, buy: {rate.buy}, sell: {rate.sell}, type: {rate.type}, '
-            f'source: {rate.source}, created: {rate.created} <br>'
-        )
-
-    return HttpResponse(str(results), status=500)
+    return render(request, 'rate_list.html', context)
 
 
 def status_code(request):
@@ -23,6 +26,15 @@ def status_code(request):
         status=301,
         headers={'Location': '/rate/list/'}
     )
+
+
+def test_template(request):
+    name = request.GET.get('name')
+    context = {
+        'username': name
+    }
+
+    return render(request, 'test.html', context)
 
 
 '''

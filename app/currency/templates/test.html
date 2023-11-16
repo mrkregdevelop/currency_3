@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Template
+{% endblock title %}
+
+
+{% block content %}
+
+    {% if username %}
+    <h1>Your name is: {{ username }}</h1>
+    {% else %}
+    <h1>No name</h1>
+    {% endif %}
+
+{% endblock content %}
