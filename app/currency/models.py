@@ -14,3 +14,7 @@ class Rate(models.Model):
     #     if self.created is None:
     #         self.created = timezone.now()
     #     return super().save(....)
+
+
+class Source(models.Model):
+    name = models.CharField(max_length=64)

@@ -6,14 +6,15 @@
 
 {% block content %}
 
-    <a href="/rate/create/">Create</a><br>
+    <a href="{% url 'currency:rate-create' %}">Create</a><br>
 
-{% for rate in rates %}
+{% for rate in object_list %}
   Id: {{ rate.id }}
   Buy:{{ rate.buy }}
   Sell: {{ rate.sell }}
-    <a href="/rate/update/{{ rate.id }}/">Edit</a>
-    <a href="/rate/delete/{{ rate.id }}/">Delete</a>
+    <a href="{% url 'currency:rate-update' rate.id %}">Edit</a>
+    <a href="{% url 'currency:rate-delete' rate.id %}">Delete</a>
+    <a href="{% url 'currency:rate-details' rate.id %}">Details</a>
     <br>
 {% endfor %}
 
