@@ -44,6 +44,8 @@ DJANGO_APPS = [
 EXTERNAL_APPS = [
     'django_extensions',
     'debug_toolbar',
+    'rangefilter',
+    'import_export',
 ]
 INTERNAL_APPS = [
     'currency',

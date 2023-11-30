@@ -3,6 +3,8 @@ django-extensions
 ipython
 Jinja2
 django-debug-toolbar
+django-admin-rangefilter
+django-import-export
 
 #flake8
 flake8
