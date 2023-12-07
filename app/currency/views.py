@@ -1,11 +1,15 @@
 from time import time
 
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.views.generic import (
     ListView, CreateView, UpdateView,
     DeleteView, DetailView, TemplateView
 )
 from django.urls import reverse_lazy
+
 
 from currency.forms import RateForm
 from currency.models import Rate, ContactUs
@@ -96,6 +100,27 @@ class ContactUsCreateView(TimeItMixin, CreateView):
         self._send_email()
 
         return redirect
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    # WRONG! model = User
+    model = get_user_model()
+    template_name = 'profile.html'
+    success_url = reverse_lazy('index')
+    fields = (
+        'first_name',
+        'last_name'
+    )
+
+    # def get_queryset(self):
+    #     qs = super().get_queryset().filter(id=self.request.user.id)
+    #     return qs
+
+    def get_object(self, queryset=None):
+        qs = self.get_queryset()
+
+        return qs.get(id=self.request.user.id)
+
 
 
 """
