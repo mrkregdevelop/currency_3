@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from currency.views import IndexView, ProfileView
+from currency.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('auth/', include('django.contrib.auth.urls')),
-    path('auth/profile/', ProfileView.as_view(), name='profile'),
+    path('auth/', include('account.urls')),
 
     path('currency/', include('currency.urls')),
 
