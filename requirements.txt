@@ -5,6 +5,8 @@ Jinja2
 django-debug-toolbar
 django-admin-rangefilter
 django-import-export
+django-storages
+boto3
 
 #flake8
 flake8

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{%  block title %}
+{% block title %}
     Rates List
 {% endblock title %}
 
@@ -8,18 +8,47 @@
 
     <a href="{% url 'currency:rate-create' %}">Create</a><br>
 
-{% for rate in object_list %}
-  Id: {{ rate.id }}
-  Buy:{{ rate.buy }}
-  Sell: {{ rate.sell }}
-  Created: {{ rate.created }}
-  Currency type: {{ rate.get_currency_type_display }}
-    Source: {{ rate.source }}
-    
-    <a href="{% url 'currency:rate-update' rate.id %}">Edit</a>
-    <a href="{% url 'currency:rate-delete' rate.id %}">Delete</a>
-    <a href="{% url 'currency:rate-details' rate.id %}">Details</a>
-    <br>
-{% endfor %}
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sell</th>
+                <th scope="col">Currency Type</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rate in object_list %}
+                <tr>
+                    <th scope="row">{{ rate.id }}</th>
+                    <td>{{ rate.buy }}</td>
+                    <td>{{ rate.sell }}</td>
+                    <td>{{ rate.get_currency_type_display }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                               aria-expanded="false">
+                                Actions
+                            </a>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'currency:rate-update' rate.id %}">Edit</a>
+                                <a class="dropdown-item" href="{% url 'currency:rate-delete' rate.id %}">Delete</a>
+                                <a class="dropdown-item" href="{% url 'currency:rate-details' rate.id %}">Details</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">Col 1</div>
+        <div class="col-lg-6 col-sm-12">Col 2</div>
+    </div>
 
 {% endblock content %}
