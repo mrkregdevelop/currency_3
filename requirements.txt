@@ -8,6 +8,7 @@ django-import-export
 django-storages
 boto3
 Celery
+requests
 
 #flake8
 flake8

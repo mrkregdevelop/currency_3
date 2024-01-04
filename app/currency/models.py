@@ -22,7 +22,7 @@ class Rate(models.Model):
         verbose_name_plural = _('Rates')
 
     def __str__(self):
-        return f'{self.buy} - {self.sell} - {self.source}'
+        return f'{self.buy} - {self.sell}'
 
 
 class Source(models.Model):
@@ -35,6 +35,7 @@ class Source(models.Model):
     rate_set
     '''
     name = models.CharField(_('Source'), max_length=64)
+    code_name = models.CharField(_('Code name'), max_length=64, unique=True)
 
     class Meta:
         verbose_name = _('Source')

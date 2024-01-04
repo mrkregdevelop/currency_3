@@ -1,0 +1,1 @@
+PRIVATBANK_CODE_NAME = 'privat'
