@@ -17,3 +17,6 @@ createsuperuser:
 
 flake:
 	flake8 app/
+
+worker:
+	cd app && celery -A settings worker -l info --autoscale 1,10
