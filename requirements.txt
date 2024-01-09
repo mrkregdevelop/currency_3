@@ -6,6 +6,7 @@ django-debug-toolbar
 django-admin-rangefilter
 django-import-export
 django-storages
+django-filter
 boto3
 Celery
 requests

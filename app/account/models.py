@@ -37,4 +37,11 @@ class User(AbstractUser):
         if not self.pk:
             self.username = uuid.uuid4()
 
-        return super().save(*args, **kwargs)
+        print('BEFORE SAVE IN MODEL SAVE')
+        # self.email = self.email.lower()
+
+        instance = super().save(*args, **kwargs)
+
+        print('AFTER SAVE IN MODEL SAVE')
+
+        return instance
