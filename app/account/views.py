@@ -45,16 +45,3 @@ class UserActivateView(RedirectView):
             user.save(update_fields=('is_active',))
 
         return super().get_redirect_url(*args, **kwargs)
-
-
-"""
-1. Email + password + confirm password (get email)
-2. Email (get email) + password + confirm password
-3. Email (get email) + 7 days
-4. phone + passport + code (confirm) + login
-
-
-1. form (email, password, confirm password)
-2. send email with confirmation link
-3. Activation endpoint
-"""

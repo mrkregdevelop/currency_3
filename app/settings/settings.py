@@ -48,6 +48,7 @@ EXTERNAL_APPS = [
     'rangefilter',
     'import_export',
     'django_filters',
+    'rest_framework'
 ]
 INTERNAL_APPS = [
     'currency',
@@ -119,6 +120,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'account.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

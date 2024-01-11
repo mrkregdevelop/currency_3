@@ -1,4 +1,5 @@
 import re
+import json
 from datetime import datetime, timedelta
 from time import time
 
@@ -8,6 +9,8 @@ from django.views.generic import (
 )
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from currency.filters import RateFilter
 from currency.forms import RateForm
@@ -111,7 +114,6 @@ class ContactUsCreateView(TimeItMixin, CreateView):
                 'body': body
             }
         )
-
 
     def form_valid(self, form):
         redirect = super().form_valid(form)

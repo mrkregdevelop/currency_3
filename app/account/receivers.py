@@ -19,3 +19,11 @@ def fix_user_phone(instance, **kwargs):
 @receiver(post_save, sender=User)
 def lower_user_email(instance, **kwargs):
     print('POST SAVE IN SIGNALS')
+
+
+'''
+C - POST
+R - GET
+U - PUT/PATCH
+D - DELETE
+'''
