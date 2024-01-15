@@ -8,6 +8,10 @@ django-import-export
 django-storages
 django-filter
 djangorestframework
+djangorestframework-xml
+djangorestframework-yaml
+djangorestframework-simplejwt
+drf-yasg
 boto3
 Celery
 requests
