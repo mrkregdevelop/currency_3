@@ -66,21 +66,7 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
 
-class TimeItMixin:
-
-    def dispatch(self, request, *args, **kwargs):
-        print('BEFORE IN VIEW')
-        start = time()
-
-        response = super().dispatch(request, *args, **kwargs)
-
-        end = time()
-        print(f'AFTER IN VIEW {end - start}')
-
-        return response
-
-
-class ContactUsCreateView(TimeItMixin, CreateView):
+class ContactUsCreateView(CreateView):
     model = ContactUs
     template_name = 'contactus_create.html'
     success_url = reverse_lazy('index')

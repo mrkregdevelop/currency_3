@@ -15,6 +15,7 @@ drf-yasg
 boto3
 Celery
 requests
+model-bakery
 
 #flake8
 flake8
@@ -25,3 +26,5 @@ flake8-breakpoint
 #pytest
 pytest
 pytest-django
+pytest-cov
+pytest-mock
