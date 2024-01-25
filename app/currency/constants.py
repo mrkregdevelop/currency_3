@@ -1,1 +1,3 @@
 PRIVATBANK_CODE_NAME = 'privat'
+
+LATEST_RATES_CACHE_KEY = 'latest_rates'
