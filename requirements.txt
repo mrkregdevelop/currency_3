@@ -17,6 +17,7 @@ Celery
 requests
 model-bakery
 pymemcache
+gunicorn
 
 #flake8
 flake8

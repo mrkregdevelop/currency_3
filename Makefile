@@ -26,3 +26,6 @@ beat:
 
 pytest:
 	pytest app/tests --cov=app --cov-report html && coverage report --fail-under=75.4477
+
+gunicorn:
+	cd app && gunicorn --workers 4 settings.wsgi --timeout 30 --max-requests 10000 --log-level debug --bind 0.0.0.0:8000
