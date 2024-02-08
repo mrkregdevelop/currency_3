@@ -18,6 +18,7 @@ requests
 model-bakery
 pymemcache
 gunicorn
+psycopg2-binary
 
 #flake8
 flake8
