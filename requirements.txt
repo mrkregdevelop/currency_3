@@ -19,6 +19,7 @@ model-bakery
 pymemcache
 gunicorn
 psycopg2-binary
+django-environ
 
 #flake8
 flake8

@@ -1,6 +1,5 @@
 upstream django {
     server localhost:8000;
-    server localhost:8001;
 }
 
 
