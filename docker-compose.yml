@@ -1,16 +1,71 @@
 version: "3.9"
 
+x-defaults: &x-defaults
+  image: local
+  build: .
+  stdin_open: true
+  tty: true
+  env_file: .env
+  depends_on:
+    - postgres
+    - rabbitmq
+    - memcached
+
+
 services:
+  backend:
+#    command: python3 ./app/manage.py runserver 0.0.0.0:8000
+    <<: *x-defaults
+    container_name: backend
+    ports:
+#      - "8000:8000"
+      - "8001:8001" # dev port
+#    volumes:
+#      - "./:/project/code"
+
+  celery:
+    command: celery -A settings worker -l info -c 4
+    container_name: celery
+    <<: *x-defaults
+
+  celerybeat:
+    command: celery -A settings beat -l info
+    container_name: celerybeat
+    <<: *x-defaults
+
   memcached:
     image: memcached:1.6.23-alpine
     container_name: memcached
-    ports:
-      - "11211:11211"
+#    ports:
+#      - "11211:11211"
 
   rabbitmq:
     image: rabbitmq:3.12.12-management-alpine
     container_name: rabbitmq
     env_file: .env
     ports:
-      - "5672:5672"
+#      - "5672:5672"
       - "15672:15672"
+
+  postgres:
+    image: postgres:15.6-alpine
+    container_name: postgres
+    env_file: .env
+#    ports:
+#      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - backend
+    volumes:
+      - "./default.conf:/etc/nginx/conf.d/default.conf:ro"
+    ports:
+      - "80:80"
+
+volumes:
+  db_data: {}

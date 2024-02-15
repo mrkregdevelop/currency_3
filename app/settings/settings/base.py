@@ -105,11 +105,11 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'currency-db',
-        'USER': 'currency',
-        'PASSWORD': 'POSTGRES_PASSWORD',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env.str('POSTGRES_DB', 'currency-db'),
+        'USER': env.str('POSTGRES_USER', 'currency'),
+        'PASSWORD': env.str('POSTGRES_PASSWORD', ''),
+        'HOST': env.str('POSTGRES_HOST', 'localhost'),
+        'PORT': env.str('POSTGRES_PORT', '5432'),
     }
 }
 
@@ -192,9 +192,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'static',
 ]
-STATIC_ROOT = BASE_DIR / 'var/static'
+# STATIC_ROOT = BASE_DIR / 'var/static'
+STATIC_ROOT = '/tmp/static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'var/media'
@@ -248,6 +249,14 @@ RABBITMQ_PORT = env.str('RABBITMQ_PORT', '5672')
 CELERY_BROKER_URL = f'amqp://{RABBITMQ_USER}:{RABBITMQ_PASS}@{RABBITMQ_HOST}:{RABBITMQ_PORT}'
 # amqp, localhost, port=5672, user=guest, password=guest
 
+MEMCACHED_HOST = env.str('MEMCACHED_HOST', 'localhost')
+MEMCACHED_PORT = env.str('MEMCACHED_PORT', '11211')
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": f"{MEMCACHED_HOST}:{MEMCACHED_PORT}",
+    }
+}
 
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
@@ -255,11 +264,4 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/5')
     },
 
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
-    }
 }
